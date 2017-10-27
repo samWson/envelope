@@ -16,7 +16,7 @@ func main() {
 
 	switch first := args[0]; first {
 	case "add":
-		fmt.Println("Add called")
+		add(args[1:])
 	default:
 		// No args or incorrect args
 		fmt.Println(help)
@@ -32,3 +32,7 @@ Usage:
 
 Examples:
     add    add a new item to a budget`
+
+func add(args []string) {
+	fmt.Printf("add args: %v\n", args)
+}
