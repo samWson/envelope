@@ -7,13 +7,28 @@ import (
 
 func main() {
 
-	switch args := os.Args[1:]; args {
+	var args []string = os.Args[1:]
+
+	if len(args) < 1 {
+		fmt.Println(help)
+		return
+	}
+
+	switch first := args[0]; first {
+	case "add":
+		fmt.Println("Add called")
 	default:
 		// No args or incorrect args
-		fmt.Println(`Usage: 
+		fmt.Println(help)
+		return
+	}
+
+}
+
+var help string = `Envelope is a budgeting tool implementing the envelope method.
+
+Usage:
     envelope [command]
 
 Examples:
-    envelope add    add a new item to a budget`)
-	}
-}
+    add    add a new item to a budget`
