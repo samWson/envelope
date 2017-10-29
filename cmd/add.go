@@ -25,7 +25,7 @@ package cmd
 
 import "fmt"
 
-// Add adds a new item to a budget depending on the subcommand.
+// Add adds a new item to a budget depending on the sub-command.
 func Add(args []string) {
 
 	if len(args) < 1 {
@@ -33,7 +33,15 @@ func Add(args []string) {
 		return
 	}
 
-	fmt.Printf("add called with args: %s\n", args)
+	switch command := args[0]; command {
+	case "income":
+		fmt.Printf("income called with args: %s\n", args[1:])
+	default:
+		// Unrecognised args
+		fmt.Println(help)
+		return
+	}
+
 }
 
 var help string = `Add (envelope add) adds items to a budget.
