@@ -20,34 +20,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Package cmd implements the commands of Envelope.
 package cmd
 
 import "fmt"
 
-// Add adds a new item to a budget depending on the sub-command.
-func Add(args []string) {
-
-	if len(args) < 1 {
-		fmt.Println(help)
-		return
-	}
-
-	switch command := args[0]; command {
-	case "income":
-		Income(args[1:])
-	default:
-		// Unrecognised args
-		fmt.Println(help)
-		return
-	}
-
+func Income(args []string) {
+	fmt.Printf("Income called with args: %s\n", args)
 }
-
-var help string = `Add (envelope add) adds items to a budget.
-
-Usage:
-    envelope add [item]
-
-Examples:
-    income    add new income to a budget`
