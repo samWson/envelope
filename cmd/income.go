@@ -24,6 +24,19 @@ package cmd
 
 import "fmt"
 
+// Income adds income sources to a budget.
 func Income(args []string) {
-	fmt.Printf("Income called with args: %s\n", args)
+
+	if len(args) < 1 {
+		fmt.Println(incomeHelp)
+		return
+	}
 }
+
+var incomeHelp string = `Income (envelope add income) adds income items to a budget.
+
+Usage:
+    envelope add income [amount]
+
+Examples:
+    1000    add a $1000.00 income to a budget`
