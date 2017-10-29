@@ -27,5 +27,19 @@ import "fmt"
 
 // Add adds a new item to a budget depending on the subcommand.
 func Add(args []string) {
+
+	if len(args) < 1 {
+		fmt.Println(help)
+		return
+	}
+
 	fmt.Printf("add called with args: %s\n", args)
 }
+
+var help string = `Add (envelope add) adds items to a budget.
+
+Usage:
+    envelope add [item]
+
+Examples:
+    income    add new income to a budget`
