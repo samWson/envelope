@@ -22,7 +22,10 @@
 
 package cmd
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 // Income adds income sources to a budget.
 func Income(args []string) {
@@ -31,6 +34,10 @@ func Income(args []string) {
 		fmt.Println(incomeHelp)
 		return
 	}
+
+	amount, err := strconv.ParseFloat(args[0], 64)
+
+	fmt.Printf("Income called with the amount %s\n", args[0])
 }
 
 var incomeHelp string = `Income (envelope add income) adds income items to a budget.
