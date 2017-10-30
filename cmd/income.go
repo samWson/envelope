@@ -35,7 +35,12 @@ func Income(args []string) {
 		return
 	}
 
-	amount, err := strconv.ParseFloat(args[0], 64)
+	_, err := strconv.ParseFloat(args[0], 64)
+
+	if err != nil {
+		fmt.Printf("Amount requires a valid number.\n%v\n", err)
+		return
+	}
 
 	fmt.Printf("Income called with the amount %s\n", args[0])
 }
