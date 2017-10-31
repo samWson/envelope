@@ -35,14 +35,19 @@ func Income(args []string) {
 		return
 	}
 
-	_, err := strconv.ParseFloat(args[0], 64)
+	amount, err := strconv.ParseFloat(args[0], 64)
+	var tran Transaction
 
 	if err != nil {
 		fmt.Printf("Amount requires a valid number.\n%v\n", err)
 		return
+	} else {
+		tran.category = "income"
+		tran.amount = amount
 	}
 
 	fmt.Printf("Income called with the amount %s\n", args[0])
+	fmt.Printf("Transaction created: %v\n", tran)
 }
 
 var incomeHelp string = `Income (envelope add income) adds income items to a budget.
@@ -52,3 +57,8 @@ Usage:
 
 Examples:
     1000    add a $1000.00 income to a budget`
+
+type Transaction struct {
+	category string
+	amount   float64
+}
