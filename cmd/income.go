@@ -24,11 +24,12 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/samWson/envelope/record"
 	"strconv"
 )
 
 // Income adds income sources to a budget.
-func Income(args []string) {
+func Income(args []string, tran *record.Transaction) {
 
 	if len(args) < 1 {
 		fmt.Println(incomeHelp)
@@ -36,14 +37,12 @@ func Income(args []string) {
 	}
 
 	amount, err := strconv.ParseFloat(args[0], 64)
-	var tran Transaction
 
 	if err != nil {
 		fmt.Printf("Amount requires a valid number.\n%v\n", err)
 		return
 	} else {
-		tran.category = "income"
-		tran.amount = amount
+		tran.Amount = amount
 	}
 
 	fmt.Printf("Income called with the amount %s\n", args[0])
@@ -57,8 +56,3 @@ Usage:
 
 Examples:
     1000    add a $1000.00 income to a budget`
-
-type Transaction struct {
-	category string
-	amount   float64
-}

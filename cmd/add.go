@@ -23,10 +23,13 @@
 // Package cmd implements the commands of Envelope.
 package cmd
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/samWson/envelope/record"
+)
 
 // Add adds a new item to a budget depending on the sub-command.
-func Add(args []string) {
+func Add(args []string, tran *record.Transaction) {
 
 	if len(args) < 1 {
 		fmt.Println(help)
@@ -35,7 +38,8 @@ func Add(args []string) {
 
 	switch command := args[0]; command {
 	case "income":
-		Income(args[1:])
+		tran.Category = "income"
+		Income(args[1:], tran)
 	default:
 		// Unrecognised args
 		fmt.Println(help)

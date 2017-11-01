@@ -25,6 +25,7 @@ package main
 import (
 	"fmt"
 	"github.com/samWson/envelope/cmd"
+	"github.com/samWson/envelope/record"
 	"os"
 )
 
@@ -40,7 +41,8 @@ func main() {
 
 	switch first := args[0]; first {
 	case "add":
-		cmd.Add(args[1:])
+		var trans record.Transaction
+		cmd.Add(args[1:], &trans)
 	default:
 		// No args or incorrect args
 		fmt.Println(help)
