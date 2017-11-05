@@ -23,9 +23,12 @@
 // Package record implements types representing transactions of money in a budget.
 package record
 
+import "time"
+
 // Transaction is a single record of monetary change in a budget e.g. income
 // entered, expense remove, or money added to an envelope.
 type Transaction struct {
 	Category string
 	Amount   float64
+	Date     time.Time
 }

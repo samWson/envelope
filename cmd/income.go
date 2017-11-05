@@ -26,6 +26,7 @@ import (
 	"fmt"
 	"github.com/samWson/envelope/record"
 	"strconv"
+	"time"
 )
 
 // Income adds income sources to a budget.
@@ -43,8 +44,10 @@ func Income(args []string, tran *record.Transaction) {
 		return
 	} else {
 		tran.Amount = amount
+		tran.Date = time.Now()
 	}
 
+	// TODO: Write to CSV file
 	fmt.Printf("Income called with the amount %s\n", args[0])
 	fmt.Printf("Transaction created: %v\n", tran)
 }
