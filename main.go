@@ -29,8 +29,15 @@ import (
 	"os"
 )
 
+const (
+	headers = "category,amount,date"
+	budget  = "~/.budget"
+)
+
 // Main passes arguments on to subcommands.
 func main() {
+
+	verifyBudget()
 
 	var args []string = os.Args[1:]
 
@@ -58,3 +65,23 @@ Usage:
 
 Examples:
     add    add a new item to a budget`
+
+// verifyBudget checks that the budget file exists, or creates a default file.
+func verifyBudget() {
+
+	file, err := os.Open(budget)
+
+	if err != nil {
+
+		file, err := os.Create(budget)
+		file.WriteString(headers)
+
+		if err != nil {
+			fmt.Printf("Error creating budget file: %v", err)
+		}
+
+	} else {
+		file.Close()
+	}
+
+}
