@@ -81,9 +81,20 @@ func verifyBudget() {
 			log.Fatalf("Error creating budget file: %v", err)
 		}
 
-		file.WriteString(headers)
+		writeHeaders(file, headers)
+
 	} else {
 
 	}
 
+}
+
+// writeHeaders writes column headers to an empty budget file.
+func writeHeaders(f *os.File, h string) {
+
+	_, err := f.WriteString(h)
+
+	if err != nil {
+		log.Fatalf("Error writing headers to budget file: %v", err)
+	}
 }
