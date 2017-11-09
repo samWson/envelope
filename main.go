@@ -26,6 +26,7 @@ import (
 	"fmt"
 	"github.com/samWson/envelope/cmd"
 	"github.com/samWson/envelope/record"
+	"log"
 	"os"
 )
 
@@ -75,12 +76,12 @@ func verifyBudget() {
 	if err != nil {
 
 		file, err := os.Create(budget)
-		file.WriteString(headers)
 
 		if err != nil {
-			fmt.Printf("Error creating budget file: %v", err)
+			log.Fatalf("Error creating budget file: %v", err)
 		}
 
+		file.WriteString(headers)
 	} else {
 
 	}
