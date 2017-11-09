@@ -70,6 +70,7 @@ Examples:
 func verifyBudget() {
 
 	file, err := os.Open(budget)
+	defer file.Close()
 
 	if err != nil {
 
@@ -81,7 +82,7 @@ func verifyBudget() {
 		}
 
 	} else {
-		file.Close()
+
 	}
 
 }
