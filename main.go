@@ -82,11 +82,8 @@ func verifyBudget() {
 		}
 
 		writeHeaders(file, headers)
-
-	} else {
-
 	}
-
+	// A successful os.Open() is enough to confirm a file exists.
 }
 
 // writeHeaders writes column headers to an empty budget file.
