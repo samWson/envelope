@@ -28,11 +28,12 @@ import (
 	"github.com/samWson/envelope/record"
 	"log"
 	"os"
+	"os/user"
 )
 
 const (
 	headers = "category,amount,date"
-	budget  = "~/.budget"
+	budget  = ".budget"
 )
 
 // Main passes arguments on to subcommands.
@@ -70,6 +71,14 @@ Examples:
 // verifyBudget checks that the budget file exists, or creates a default file.
 func verifyBudget() {
 
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatalf("Error getting the current user: %v", err)
+	}
+
+	home := usr.HomeDir
+
+	// TODO: refactor this with code from: https://golangcode.com/check-if-a-file-exists/
 	file, err := os.Open(budget)
 	defer file.Close()
 
