@@ -31,10 +31,7 @@ import (
 	"os/user"
 )
 
-const (
-	headers = "category,amount,date"
-	budget  = ".budget"
-)
+const headers = "category,amount,date"
 
 // Main passes arguments on to subcommands.
 func main() {
@@ -77,14 +74,12 @@ func verifyBudget() {
 	}
 
 	home := usr.HomeDir
+	budget := home + "/.budget"
 
-	// TODO: refactor this with code from: https://golangcode.com/check-if-a-file-exists/
-	file, err := os.Open(budget)
-	defer file.Close()
-
-	if err != nil {
-
+	if _, err := os.Stat(budget); os.IsNotExist(err) {
+		fmt.Println(budget, " file does not exist. Creating default file at: ", budget)
 		file, err := os.Create(budget)
+		defer file.Close()
 
 		if err != nil {
 			log.Fatalf("Error creating budget file: %v", err)
@@ -92,7 +87,6 @@ func verifyBudget() {
 
 		writeHeaders(file, headers)
 	}
-	// A successful os.Open() is enough to confirm a file exists.
 }
 
 // writeHeaders writes column headers to an empty budget file.
