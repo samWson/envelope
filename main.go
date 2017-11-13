@@ -31,7 +31,7 @@ import (
 	"os/user"
 )
 
-const headers = "category,amount,date"
+const headers = "category,amount,date\n"
 
 // Main passes arguments on to subcommands.
 func main() {
