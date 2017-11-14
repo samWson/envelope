@@ -25,6 +25,9 @@ package cmd
 import (
 	"fmt"
 	"github.com/samWson/envelope/record"
+	"log"
+	"os"
+	"os/user"
 	"strconv"
 	"time"
 )
@@ -47,7 +50,18 @@ func Income(args []string, tran *record.Transaction) {
 		tran.Date = time.Now()
 	}
 
-	// TODO: Write to CSV file
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatalf("Error getting the current user: %v", err)
+	}
+
+	home := usr.HomeDir + "/.budget"
+	file, err := os.OpenFile(home, os.O_APPEND|os.O_WRONLY, 0644)
+
+	if err != nil {
+		log.Fatalf("Error opening budget file: %v", err)
+	}
+
 	fmt.Printf("Income called with the amount %s\n", args[0])
 	fmt.Printf("Transaction created: %v\n", tran)
 }
